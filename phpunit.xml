@@ -27,6 +27,14 @@
         <env name="DB_DATABASE" value=":memory:"/>
         <env name="DB_URL" value=""/>
         <env name="MAIL_MAILER" value="array"/>
+        <env name="INERTIA_SSR_ENABLED" value="false"/>
+        <env name="APP_URL" value="https://brillance-plus.fr"/>
+        <env name="APP_LOCALE" value="fr"/>
+        <env name="BUSINESS_EMAIL" value=""/>
+        <env name="BUSINESS_WHATSAPP" value="+33 7 80 64 73 27"/>
+        <env name="BUSINESS_MESSENGER" value=""/>
+        <env name="INQUIRY_NOTIFICATION_EMAIL" value=""/>
+        <env name="INQUIRY_SEND_CUSTOMER_CONFIRMATION" value="false"/>
         <env name="QUEUE_CONNECTION" value="sync"/>
         <env name="SESSION_DRIVER" value="array"/>
         <env name="PULSE_ENABLED" value="false"/>

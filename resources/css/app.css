@@ -3,9 +3,272 @@
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme inline {
     --font-sans:
         Instrument Sans, ui-sans-serif, system-ui, sans-serif,
         'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
         'Noto Color Emoji';
+    --font-display:
+        Fraunces, ui-serif, Georgia, Cambria, 'Times New Roman', serif;
+
+    --color-background: var(--background);
+    --color-background-muted: var(--background-muted);
+    --color-surface: var(--surface);
+    --color-surface-muted: var(--surface-muted);
+    --color-foreground: var(--foreground);
+    --color-foreground-muted: var(--foreground-muted);
+    --color-border: var(--border);
+    --color-border-strong: var(--border-strong);
+    --color-accent: var(--accent);
+    --color-accent-strong: var(--accent-strong);
+    --color-accent-soft: var(--accent-soft);
+    --color-primary: var(--primary);
+    --color-primary-hover: var(--primary-hover);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-ring: var(--ring);
+    --color-danger: var(--danger);
+    --color-danger-soft: var(--danger-soft);
+    --color-success: var(--success);
+    --color-success-soft: var(--success-soft);
+
+    --color-brand-sky: #38bdf8;
+    --color-brand-deep: #0f4c81;
+    --color-brand-navy: #0b1220;
+}
+
+@theme {
+    --animate-fade-up: fade-up 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    --animate-fade-in: fade-in 1.2s ease-out both;
+    --animate-twinkle: twinkle 5s ease-in-out infinite;
+    --animate-float: float 9s ease-in-out infinite;
+
+    @keyframes fade-up {
+        from {
+            opacity: 0;
+            transform: translateY(18px);
+        }
+        to {
+            opacity: 1;
+            transform: none;
+        }
+    }
+
+    @keyframes fade-in {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    @keyframes twinkle {
+        0%,
+        100% {
+            opacity: 0.35;
+            transform: scale(0.82) rotate(0deg);
+        }
+        50% {
+            opacity: 1;
+            transform: scale(1) rotate(12deg);
+        }
+    }
+
+    @keyframes float {
+        0%,
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+        50% {
+            transform: translate3d(0, -10px, 0);
+        }
+    }
+}
+
+/*
+ * Design tokens. Light theme by default, dark theme under `.dark`.
+ * Text colours are chosen to meet WCAG 2.2 AA contrast on their backgrounds.
+ */
+:root {
+    --background: #ffffff;
+    --background-muted: #f4f8fc;
+    --surface: #ffffff;
+    --surface-muted: #f4f8fc;
+    --foreground: #172033;
+    --foreground-muted: #4e5d75;
+    --border: #e2e9f2;
+    --border-strong: #cbd7e6;
+    --accent: #0ea5e9;
+    --accent-strong: #0369a1;
+    --accent-soft: #e0f2fe;
+    --primary: #0f4c81;
+    --primary-hover: #0b3d69;
+    --primary-foreground: #ffffff;
+    --ring: #38bdf8;
+    --danger: #b42318;
+    --danger-soft: #fef3f2;
+    --success: #067647;
+    --success-soft: #ecfdf3;
+    --highlight-from: #0284c7;
+    --highlight-to: #0f4c81;
+    --scrollbar-thumb: rgb(15 76 129 / 0.22);
+    --scrollbar-thumb-hover: rgb(2 132 199 / 0.6);
+}
+
+.dark {
+    --background: #0a0f1c;
+    --background-muted: #0d1424;
+    --surface: #111827;
+    --surface-muted: #162033;
+    --foreground: #f3f7fc;
+    --foreground-muted: #a7b4c8;
+    --border: #1f2a3d;
+    --border-strong: #2c3a52;
+    --accent: #38bdf8;
+    --accent-strong: #7dd3fc;
+    --accent-soft: rgb(56 189 248 / 0.12);
+    --primary: #38bdf8;
+    --primary-hover: #7dd3fc;
+    --primary-foreground: #0b1220;
+    --ring: #7dd3fc;
+    --danger: #fda29b;
+    --danger-soft: rgb(240 68 56 / 0.12);
+    --success: #75e0a7;
+    --success-soft: rgb(23 178 106 / 0.12);
+    --highlight-from: #38bdf8;
+    --highlight-to: #a5e3ff;
+    --scrollbar-thumb: rgb(167 180 200 / 0.24);
+    --scrollbar-thumb-hover: rgb(56 189 248 / 0.6);
+}
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 6rem;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+        background-color: var(--background);
+        color: var(--foreground);
+    }
+
+    h1,
+    h2,
+    h3 {
+        text-wrap: balance;
+    }
+
+    p {
+        text-wrap: pretty;
+    }
+
+    :focus-visible {
+        outline: 2px solid var(--ring);
+        outline-offset: 3px;
+    }
+
+    ::selection {
+        background-color: rgb(56 189 248 / 0.28);
+    }
+
+    /* Slim, rounded scrollbars that follow the theme. */
+    html {
+        scrollbar-gutter: stable;
+    }
+
+    ::-webkit-scrollbar {
+        width: 12px;
+        height: 12px;
+    }
+
+    ::-webkit-scrollbar-track,
+    ::-webkit-scrollbar-corner {
+        background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        min-height: 48px;
+        border: 3px solid transparent;
+        border-radius: 9999px;
+        background-color: var(--scrollbar-thumb);
+        background-clip: padding-box;
+        transition: background-color 0.2s ease;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background-color: var(--scrollbar-thumb-hover);
+    }
+
+    /* Firefox has no ::-webkit-scrollbar. Chromium would let these properties override the rules above. */
+    @supports not selector(::-webkit-scrollbar) {
+        * {
+            scrollbar-width: thin;
+            scrollbar-color: var(--scrollbar-thumb) transparent;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        html {
+            scroll-behavior: auto;
+        }
+
+        *,
+        *::before,
+        *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+        }
+    }
+}
+
+@utility container-site {
+    width: 100%;
+    max-width: 80rem;
+    margin-inline: auto;
+    padding-inline: 1rem;
+
+    @media (width >= 40rem) {
+        padding-inline: 1.5rem;
+    }
+
+    @media (width >= 64rem) {
+        padding-inline: 2rem;
+    }
+}
+
+@utility text-highlight {
+    background-image: linear-gradient(
+        120deg,
+        var(--highlight-from),
+        var(--highlight-to)
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+/* Scroll reveal: only applied by the v-reveal directive, so content stays visible without JavaScript. */
+.reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition:
+        opacity 0.8s cubic-bezier(0.2, 0.7, 0.2, 1),
+        transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal.is-revealed {
+    opacity: 1;
+    transform: none;
+}
+
+/* Smooth cross-fade when switching themes (View Transitions API). */
+::view-transition-old(root),
+::view-transition-new(root) {
+    animation-duration: 320ms;
+    animation-timing-function: ease-out;
 }

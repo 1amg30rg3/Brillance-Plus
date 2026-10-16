@@ -1,7 +1,7 @@
 import type { Directive } from 'vue';
 import type { Auth } from '@/types/auth';
+import type { BusinessDetails, LocaleCode } from '@/types/site';
 
-// Extend ImportMeta interface for Vite...
 declare module 'vite/client' {
     interface ImportMetaEnv {
         readonly VITE_APP_NAME: string;
@@ -19,8 +19,14 @@ declare module '@inertiajs/core' {
         sharedPageProps: {
             name: string;
             auth: Auth;
-            sidebarOpen: boolean;
+            locale: LocaleCode;
+            translations: Record<string, unknown>;
+            business: BusinessDetails;
+            agency: { name: string; url: string };
             [key: string]: unknown;
+        };
+        flashDataType: {
+            inquiry?: 'received';
         };
     }
 }
@@ -28,6 +34,7 @@ declare module '@inertiajs/core' {
 declare module 'vue' {
     interface GlobalDirectives {
         vFocus: Directive<HTMLElement, boolean | undefined>;
+        vReveal: Directive<HTMLElement, number | undefined>;
     }
 
     interface ComponentCustomProperties {

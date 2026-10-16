@@ -1,0 +1,18 @@
+/* TEAM */
+Design & development: WebSavvys
+Site: https://websavvys.com/
+Lead developer: Giorgi Gavasheli
+
+/* THANKS */
+Photography: Unsplash (https://unsplash.com/)
+Icons: Lucide (https://lucide.dev/), Simple Icons (https://simpleicons.org/)
+Fonts: Fraunces, Instrument Sans
+
+/* SITE */
+Language: Français / English
+Standards: HTML5, CSS3, TypeScript
+Components: Laravel, Inertia.js, Vue 3, Tailwind CSS
+
+/* HIRE */
+Need a custom website or web application, however complex?
+https://websavvys.com/
