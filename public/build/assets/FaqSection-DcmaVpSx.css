@@ -1,0 +1,1 @@
+@supports (interpolate-size:allow-keywords){.faq-item[data-v-b77dd2cd]{interpolate-size:allow-keywords}.faq-item[data-v-b77dd2cd]::details-content{block-size:0;transition:block-size .3s ease, content-visibility .3s allow-discrete;overflow:clip}.faq-item[open][data-v-b77dd2cd]::details-content{block-size:auto}}
