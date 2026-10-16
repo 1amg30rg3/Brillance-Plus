@@ -1,0 +1,22 @@
+Options -Indexes
+
+# Block dot-files and folders (.env, .git, .github, etc.)
+<FilesMatch "^\.">
+    Require all denied
+</FilesMatch>
+
+# Block project files that must never be downloadable
+<FilesMatch "(composer\.(json|lock)|package(-lock)?\.json|artisan|phpunit\.xml|phpstan\.neon|pint\.json|vite\.config\.ts|tsconfig\.json|pnpm-workspace\.yaml)$">
+    Require all denied
+</FilesMatch>
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Block Laravel's internal folders
+    RewriteRule ^(\.git|app|bootstrap|config|database|resources|routes|storage|tests|vendor)(/|$) - [F,L]
+
+    # Send everything else to Laravel's public folder
+    RewriteCond %{REQUEST_URI} !^/public/
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
